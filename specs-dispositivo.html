@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Especificaciones de tu dispositivo</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 24px 16px 60px;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    max-width: 480px;
+    width: 100%;
+  }
+  h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+  .card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border: 1px solid #334155;
+  }
+  .card .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #38bdf8;
+    margin-bottom: 6px;
+  }
+  .card .value {
+    font-size: 1rem;
+    word-break: break-word;
+    line-height: 1.4;
+  }
+  .info-box {
+    background: #1e293b;
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 32px;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+  }
+  .info-box strong { color: #38bdf8; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📱 Especificaciones de tu dispositivo</h1>
+  <p class="subtitle">Datos que tu navegador comparte automáticamente</p>
+
+  <div class="card">
+    <div class="label">Dispositivo / Navegador</div>
+    <div class="value" id="userAgent">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Sistema operativo (aprox.)</div>
+    <div class="value" id="platform">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Resolución de pantalla</div>
+    <div class="value" id="screenRes">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Tamaño de ventana visible</div>
+    <div class="value" id="windowSize">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Idioma del dispositivo</div>
+    <div class="value" id="language">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Zona horaria</div>
+    <div class="value" id="timezone">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Núcleos de CPU (aprox.)</div>
+    <div class="value" id="cores">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Memoria RAM (aprox., si disponible)</div>
+    <div class="value" id="memory">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Tipo de conexión</div>
+    <div class="value" id="connection">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">¿Pantalla táctil?</div>
+    <div class="value" id="touch">—</div>
+  </div>
+
+  <div class="info-box">
+    <strong>¿Por qué la página sabe todo esto?</strong><br><br>
+    Ningún permiso especial fue solicitado. Estos datos los comparte tu navegador
+    automáticamente con cualquier sitio que visitas — es parte del funcionamiento
+    normal de la web. Esto es distinto a datos como tu ubicación GPS, cámara o
+    micrófono, que sí requieren que tú des permiso explícito con un popup.<br><br>
+    Este ejercicio es para ilustrar el concepto de <strong>huella digital
+    (fingerprinting)</strong>: combinando varios de estos datos, un sitio puede
+    identificar tu dispositivo con bastante precisión sin necesitar tu nombre ni
+    contraseña.
+  </div>
+</div>
+
+<script>
+  function set(id, value) {
+    document.getElementById(id).innerText = value || 'No disponible';
+  }
+
+  set('userAgent', navigator.userAgent);
+  set('platform', navigator.platform || navigator.userAgentData?.platform);
+  set('screenRes', screen.width + ' x ' + screen.height + ' px');
+  set('windowSize', window.innerWidth + ' x ' + window.innerHeight + ' px');
+  set('language', navigator.language);
+  set('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
+  set('cores', navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' núcleos' : null);
+  set('memory', navigator.deviceMemory ? navigator.deviceMemory + ' GB (aprox.)' : null);
+  set('connection', navigator.connection?.effectiveType || null);
+  set('touch', ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'Sí' : 'No');
+</script>
+</body>
+</html>
